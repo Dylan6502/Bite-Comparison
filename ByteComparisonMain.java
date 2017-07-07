@@ -32,7 +32,7 @@ public class ByteComparisonMain extends JFrame
 		FileList(firstFile, secondFile);
 		
 		// Checking for Existance
-		FileComparing(firstFile, secondFile);
+		
 		
 		JOptionPane.showMessageDialog(null, output);
 	}
@@ -49,17 +49,17 @@ public class ByteComparisonMain extends JFrame
 		File[] allFilesDir2 = folder2.listFiles();
 		resultList2.addAll(Arrays.asList(allFilesDir2));
 		
-		
-		/*for(File b : resultList) {
+		FileComparing(allFilesDir1, allFilesDir2);
+		for(File b : resultList1) {
 			if(b.isFile()){
 				System.out.println("File");
-				//filePath = b.getAbsolutePath;
+				
 			}
 			else if(b.isDirectory()){
 				System.out.println(b.getAbsolutePath());
 			}
 			
-		}*/
+		}
 		
 	}
 	
@@ -68,18 +68,18 @@ public class ByteComparisonMain extends JFrame
 		for(int i = 0; i < file1.length; i++) {
 			for(int j = 0; j < file2.length; j++) {
 			
-			firstSize = firstFile.length();
-			secondSize = secondFile.length();
+			firstSize = file1[i].length();
+			secondSize = file2[j].length();
 			
 			// Comparing File Sizes
 			if(firstSize == secondSize) {
 				
-				output = output + "Files are the same.";
+				output = output + "Files are the same";
 			}
 			else
-				output = output + "Files are different.";
+				output = output + "Files are different";
 				
-			output = output + firstSize + "\n" + secondSize;
+			output = output+ ":\n" + firstSize + "\n" + secondSize + "\n";
 			
 			}
 		}
