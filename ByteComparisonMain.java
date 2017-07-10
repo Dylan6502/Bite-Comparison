@@ -1,15 +1,22 @@
+/*
+ * Dylan Paul
+ * Compares file size from two user given directories.
+*/
+
+
 import java.util.*;
 import java.io.*;
 import javax.swing.*;
 
 
-public class ByteComparisonMain extends JFrame
-{
+public class ByteComparisonMain extends JFrame {
+	
+///////////////////////////////////////////////////////-VARIABLES-//////////////////////////////////////////////////
+	
 	// Files
 	File firstFile;
 	File secondFile;
-	File filePath;
-	
+	File filePath;	
 	
 	// Strings
 	String rawInput;
@@ -19,6 +26,7 @@ public class ByteComparisonMain extends JFrame
 	// Numbers
 	double firstSize;
 	double secondSize;
+//////////////////////////////////////////////////////-INPUT METHOD-///////////////////////////////////////////////////////	
 	
 	public ByteComparisonMain()
 	{
@@ -31,11 +39,10 @@ public class ByteComparisonMain extends JFrame
 		
 		FileList(firstFile, secondFile);
 		
-		// Checking for Existance
-		
-		
 		JOptionPane.showMessageDialog(null, output);
 	}
+	
+////////////////////////////////////////////////////-FILE LIST METHOD-/////////////////////////////////////////////////////	
 	
 	public void FileList(File folder1, File folder2) {
 		
@@ -50,6 +57,7 @@ public class ByteComparisonMain extends JFrame
 		resultList2.addAll(Arrays.asList(allFilesDir2));
 		
 		FileComparing(allFilesDir1, allFilesDir2);
+		
 		for(File b : resultList1) {
 			if(b.isFile()){
 				System.out.println("File");
@@ -62,6 +70,8 @@ public class ByteComparisonMain extends JFrame
 		}
 		
 	}
+	
+///////////////////////////////////////////////////////////-FILE COMPARING METHOD-//////////////////////////////////////	
 	
 	public String FileComparing(File[] file1, File[] file2) {
 		
@@ -88,6 +98,7 @@ public class ByteComparisonMain extends JFrame
 		
 		return output;
 	}
+////////////////////////////////////////////////////////////-MAIN METHOD-//////////////////////////////////////////////	
 	public static void main(String args[])throws IOException
 	{	
 		new ByteComparisonMain();
