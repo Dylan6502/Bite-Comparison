@@ -9,8 +9,8 @@ public class ByteComparisonGraphics extends JFrame {
 	private String output;
 	
 	// Integers
-	private int width = 500;
-	private int height = 300;
+	private int width = 900;
+	private int height = 200;
 	
 	// Input Panels
 	private JPanel inputPanel;
@@ -52,6 +52,8 @@ public class ByteComparisonGraphics extends JFrame {
       // Builds Input Panel
       buildInputPanel();
       
+      add(inputPanel);
+      
       // Shows content
       setVisible(true);
    }
@@ -60,8 +62,11 @@ public class ByteComparisonGraphics extends JFrame {
 	   
 	   inputPanel = new JPanel();
 	   
-	   inputPanel.add(inputTextPanel);
-	   inputPanel.add(inputButtonPanel);
+	   buildInputTextPanel();
+	   buildInputButtonPanel();
+	   
+	   inputPanel.add(inputTextPanel, BorderLayout.PAGE_START);
+	   inputPanel.add(inputButtonPanel, BorderLayout.PAGE_END);
 	}
 	
 	public void buildInputTextPanel() {
@@ -78,10 +83,22 @@ public class ByteComparisonGraphics extends JFrame {
 		
 		inputButtonPanel = new JPanel();
 		
+		processButton.addActionListener(new InputButtonListener());
+		
 		inputButtonPanel.add(processButton);
 	}
+	
+	private class InputButtonListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			
+			dispose();
+		}
+	}
+ 
+public static void main(String args[]) {
+	new ByteComparisonGraphics();
+}
 }  
-   
    
    
    
