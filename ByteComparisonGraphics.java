@@ -4,12 +4,14 @@ import java.awt.event.*;
 
 public class ByteComparisonGraphics extends JFrame {
 
+//////////////////////////////////////////////////////-VARIABLES-//////////////////////////////////////////////////
+
 	// Strings
 	private String filePathName;
 	private String output;
 	
 	// Integers
-	private int width = 900;
+	private int width = 650;
 	private int height = 200;
 	
 	// Input Panels
@@ -22,9 +24,12 @@ public class ByteComparisonGraphics extends JFrame {
 	private JPanel outputTextPanel;
 	private JPanel outputButtonPanel;
 	
-	// Textbox
+	// Textbox for input
 	private static JTextField topInputBox = new JTextField(10);
 	private static JTextField bottomInputBox = new JTextField(10);
+	
+	// TextBox for output
+	private JTextArea outputBox = new JTextArea();
 	
 	// Labels
 	private JLabel topInputLabel = new JLabel("Enter First Directory.");
@@ -33,6 +38,8 @@ public class ByteComparisonGraphics extends JFrame {
 	// Buttons
 	private JButton processButton = new JButton("Process");;
 	private JButton logButton = new JButton("Log");
+
+/////////////////////////////////////////////////////////-UI BUILDING-//////////////////////////////////////////////////////
 	
 	public ByteComparisonGraphics() {
 	
@@ -58,6 +65,8 @@ public class ByteComparisonGraphics extends JFrame {
       setVisible(true);
    }
    
+/////////////////////////////////////////////////////////-INPUT PANEL-///////////////////////////////////////////////////
+   
    public void buildInputPanel() {
 	   
 	   inputPanel = new JPanel();
@@ -65,9 +74,11 @@ public class ByteComparisonGraphics extends JFrame {
 	   buildInputTextPanel();
 	   buildInputButtonPanel();
 	   
-	   inputPanel.add(inputTextPanel, BorderLayout.PAGE_START);
-	   inputPanel.add(inputButtonPanel, BorderLayout.PAGE_END);
+	   inputPanel.add(inputTextPanel);
+	   inputPanel.add(inputButtonPanel);
 	}
+	
+///////////////////////////////////////////////////////-INPUT TEXT BOXES AND LABELS-///////////////////////////////////////
 	
 	public void buildInputTextPanel() {
 		
@@ -79,6 +90,8 @@ public class ByteComparisonGraphics extends JFrame {
 		inputTextPanel.add(bottomInputBox);
 	}
 	
+//////////////////////////////////////////////////////-INPUT BUTTON-///////////////////////////////////////////////////////
+	
 	public void buildInputButtonPanel() {
 		
 		inputButtonPanel = new JPanel();
@@ -88,12 +101,39 @@ public class ByteComparisonGraphics extends JFrame {
 		inputButtonPanel.add(processButton);
 	}
 	
+///////////////////////////////////////////////////////////-OUTPUT PANEL POSSIBLY NEEDS OWN UI BUILD-///////////////////////////
+	
+	public void buildOutputButtonPanel(String sameFiles) {
+		
+		outputButtonPanel = new JPanel();
+		
+		outputBox.setText(sameFiles);
+		
+		logButton.addActionListener(new OutputButtonListener());
+		
+		outputButtonPanel.add(outputBox);
+		outputButtonPanel.add(logButton);
+	}
+	
+/////////////////////////////////////////////////////////////-INPUT BUTTON ACTION-///////////////////////////////////////
+	
 	private class InputButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
-			dispose();
+			buildOutputButtonPanel("it worked");
+			add(outputButtonPanel);
 		}
 	}
+	
+////////////////////////////////////////////////////////////////-OUTPUT BUTTON ACTION WOULD ALSO NEED MOVED-////////////////////
+	
+	private class OutputButtonListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			JOptionPane.showMessageDialog(null,"it all worked");
+		}
+	}
+	
+////////////////////////////////////////////////////////////////-TEMP MAIN UNTIL READY FOR MERGER-/////////////////////////////
  
 public static void main(String args[]) {
 	new ByteComparisonGraphics();
