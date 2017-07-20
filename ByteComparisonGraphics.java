@@ -1,17 +1,23 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 
 public class ByteComparisonGraphics extends JFrame {
 
 //////////////////////////////////////////////////////-VARIABLES-//////////////////////////////////////////////////
 
 	// Strings
-	private String filePathName;
-	private String output;
+	private String newOut;
+	private String firstInput;
+	private String secondInput;
+	
+	// File
+	private File firstFile;
+	private File secondFile;
 	
 	// Integers
-	private int width = 650;
+	private int width = 800;
 	private int height = 200;
 	
 	// Input Panels
@@ -38,6 +44,10 @@ public class ByteComparisonGraphics extends JFrame {
 	// Buttons
 	private JButton processButton = new JButton("Process");;
 	private JButton logButton = new JButton("Log");
+	
+	// Objects
+	ByteComparisonMain ByteMain;// only used to get output
+	
 
 /////////////////////////////////////////////////////////-UI BUILDING-//////////////////////////////////////////////////////
 	
@@ -58,8 +68,11 @@ public class ByteComparisonGraphics extends JFrame {
       
       // Builds Input Panel
       buildInputPanel();
+      buildOutputButtonPanel();
       
+      // adds to main panel
       add(inputPanel);
+      add(outputButtonPanel, BorderLayout.SOUTH);
       
       // Shows content
       setVisible(true);
@@ -103,11 +116,9 @@ public class ByteComparisonGraphics extends JFrame {
 	
 ///////////////////////////////////////////////////////////-OUTPUT PANEL POSSIBLY NEEDS OWN UI BUILD-///////////////////////////
 	
-	public void buildOutputButtonPanel(String sameFiles) {
+	public void buildOutputButtonPanel() {
 		
 		outputButtonPanel = new JPanel();
-		
-		outputBox.setText(sameFiles);
 		
 		logButton.addActionListener(new OutputButtonListener());
 		
@@ -120,24 +131,38 @@ public class ByteComparisonGraphics extends JFrame {
 	private class InputButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
-			buildOutputButtonPanel("it worked");
-			add(outputButtonPanel);
+			firstInput = topInputBox.getText();
+			secondInput = bottomInputBox.getText();
+			
+			firstFile = new File(firstInput);
+			secondFile = new File(secondInput);
+			
+			ByteMain = new ByteComparisonMain(firstFile, secondFile);
+			
 		}
+	}
+	
+	public File getFirstFile() {
+		return firstFile;
+	}
+	
+	public File getSecondFile() {
+		return secondFile;
+	}
+	
+	public void newOut() {
+		 newOut = ByteMain.getOut();
 	}
 	
 ////////////////////////////////////////////////////////////////-OUTPUT BUTTON ACTION WOULD ALSO NEED MOVED-////////////////////
 	
 	private class OutputButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			JOptionPane.showMessageDialog(null,"it all worked");
+			
+			newOut();
+			outputBox.setText(newOut);
 		}
 	}
-	
-////////////////////////////////////////////////////////////////-TEMP MAIN UNTIL READY FOR MERGER-/////////////////////////////
- 
-public static void main(String args[]) {
-	new ByteComparisonGraphics();
-}
 }  
    
    

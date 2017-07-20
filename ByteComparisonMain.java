@@ -26,20 +26,16 @@ public class ByteComparisonMain extends JFrame {
 	// Numbers
 	double firstSize;
 	double secondSize;
+	
+	ByteComparisonManager ByteOut;
 //////////////////////////////////////////////////////-INPUT METHOD-///////////////////////////////////////////////////////	
 	
-	public ByteComparisonMain()
+	public ByteComparisonMain(File x, File y)
 	{
-		// Input
-		rawInput = JOptionPane.showInputDialog("Enter 1st filename and path.");
-		File firstFile = new File(rawInput);
 		
-		rawInput = JOptionPane.showInputDialog("Enter another filename");
-		File secondFile = new File(rawInput);
+		FileList(x, y);
 		
-		FileList(firstFile, secondFile);
 		
-		JOptionPane.showMessageDialog(null, output);
 	}
 	
 ////////////////////////////////////////////////////-FILE LIST METHOD-/////////////////////////////////////////////////////	
@@ -73,8 +69,8 @@ public class ByteComparisonMain extends JFrame {
 	
 ///////////////////////////////////////////////////////////-FILE COMPARING METHOD-//////////////////////////////////////	
 	
-	public String FileComparing(File[] file1, File[] file2) {
-		
+	public void FileComparing(File[] file1, File[] file2) {
+		System.out.println("FILELIST!!!!!!!!!");
 		for(int i = 0; i < file1.length; i++) {
 			for(int j = 0; j < file2.length; j++) {
 			
@@ -93,15 +89,13 @@ public class ByteComparisonMain extends JFrame {
 			
 			}
 		}
+		System.out.println(output);
+		//ByteOut.pausedCiruit(output);
 		
-		
-		
+	}	
+	
+	public String getOut() {
 		return output;
-	}
-////////////////////////////////////////////////////////////-MAIN METHOD-//////////////////////////////////////////////	
-	public static void main(String args[])throws IOException
-	{	
-		new ByteComparisonMain();
 	}
 		
 }	
