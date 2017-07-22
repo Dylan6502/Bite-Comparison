@@ -2,13 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.util.Scanner;
 
 public class ByteComparisonGraphics extends JFrame {
 
 //////////////////////////////////////////////////////-VARIABLES-//////////////////////////////////////////////////
 
 	// Strings
-	private String newOut;
+	private String newOutput;
 	private String firstInput;
 	private String secondInput;
 	
@@ -47,6 +48,9 @@ public class ByteComparisonGraphics extends JFrame {
 	
 	// Objects
 	ByteComparisonMain ByteMain;// only used to get output
+	
+	//PrintWriter
+	PrintWriter logOutput;
 	
 
 /////////////////////////////////////////////////////////-UI BUILDING-//////////////////////////////////////////////////////
@@ -138,7 +142,7 @@ public class ByteComparisonGraphics extends JFrame {
 			secondFile = new File(secondInput);
 			
 			ByteMain = new ByteComparisonMain(firstFile, secondFile);
-			
+			newOut();
 		}
 	}
 	
@@ -151,7 +155,14 @@ public class ByteComparisonGraphics extends JFrame {
 	}
 	
 	public void newOut() {
-		 newOut = ByteMain.getOut();
+		 newOutput = ByteMain.getOut();
+	}
+	
+	public void logOut(String output) throws FileNotFoundException{
+		File outFile = new File("Compared_Files.txt");
+		logOutput = new PrintWriter(outFile);
+		logOutput.print(output);
+		logOutput.close();
 	}
 	
 ////////////////////////////////////////////////////////////////-OUTPUT BUTTON ACTION WOULD ALSO NEED MOVED-////////////////////
@@ -160,7 +171,12 @@ public class ByteComparisonGraphics extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			
 			newOut();
-			outputBox.setText(newOut);
+			try {
+				logOut(newOutput);
+			} catch(FileNotFoundException w) {
+				System.out.println("WHAT!!!!!!!!");
+			}
+			
 		}
 	}
 }  

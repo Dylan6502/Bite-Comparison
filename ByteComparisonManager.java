@@ -11,16 +11,8 @@ public class ByteComparisonManager {
 	
 	public ByteComparisonManager() {
 		
-		new ByteComparisonGraphics();
+		new ByteComparisonGraphics();	
 	
-	
-	}
-	
-	public void pausedCiruit(String passedOut) {
-		
-		passingOutput = passedOut;											    					  
-		JOptionPane.showMessageDialog(null,"MADE IT");													  
-		ByteGraph.newOut(passingOutput);
 	}
 	
 	
